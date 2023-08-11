@@ -1,5 +1,5 @@
 # Python
-Códigos em Python
+Tarefa em Python
 
 A tarefa é:
 Você está recebendo um csv que tem os campos de nome, email e telefone, o campo de telefone está despadronizado e precisa ser arrumado. Para arrumar, deve-se obter o telefone com o código de área do Brasil (55), deletar todos os números que não tenham DDD, e adicionar o '9' na frente de todos os telefones.
