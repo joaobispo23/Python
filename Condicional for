@@ -1,0 +1,2 @@
+for restaurante in restaurantes:
+        print(f'.{restaurante}')
