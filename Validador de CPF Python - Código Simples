@@ -1,0 +1,42 @@
+def valida_cpf(cpf):
+    """Valida um CPF brasileiro.
+
+    Args:
+        cpf (str): CPF a ser validado, somente números.
+
+    Returns:
+        bool: True se o CPF for válido, False caso contrário.
+    """
+
+    # Remove caracteres não numéricos
+    cpf = ''.join(c for c in cpf if c.isdigit())
+
+    # Verifica se o CPF possui 11 dígitos
+    if len(cpf) != 11:
+        return False
+
+    # Verifica se o CPF possui todos os dígitos iguais
+    if all(c == cpf[0] for c in cpf):
+        return False
+
+    # Validação dos dígitos verificadores
+    soma = 0
+    for i in range(9):
+        soma += int(cpf[i]) * (10 - i)
+    resto = soma % 11
+    digito1 = 0 if resto < 2 else 11 - resto
+
+    soma = 0
+    for i in range(10):
+        soma += int(cpf[i]) * (11 - i)
+    resto = soma % 11
+    digito2 = 0 if resto < 2 else 11 - resto
+
+    return digito1 == int(cpf[9]) and digito2 == int(cpf[10])
+
+# Exemplo de uso
+cpf = input("Digite o CPF (somente números): ")
+if valida_cpf(cpf):
+    print("CPF válido")
+else:
+    print("CPF inválido")
