@@ -1,11 +1,3 @@
-
-# Tenho a linha 
-#   CNPJ           CEP      IDADE  ESTADO 
-#  "12345678000190 01001000 35 SP"
-# Preciso que este arquivo saia em um padrao 
-# incluir 011 entre o final do cep e inicio da idade
-
-# Tratar arquivo e gerar padrão saida como TXT 
 def incluir_codigos(linha):
     # Remove espaços extras
     linha_sem_espacos = "".join(linha.split())
@@ -26,22 +18,30 @@ linhas = [
     "45678912000176 30301550 42 MG",
     "11223344000155 65030200 50 BA",
     "99887766000122 90850340 19 PR",
-    "22334455000188 70040900 60 DF"
+    "22334455000188 70040900 60 DF",
+    "12345678000190 01001000 35 SP",
+    "98765432000198 22031030 28 RJ",
+    "45678912000176 30301550 42 MG",
+    "11223344000155 65030201 50 RS",
+    "99887766000128 90850349 19 PR",
+    "22334455000189 70040900 60 SP"
 ]
 
-# Abre um arquivo txt para escrita
+# Cria um conjunto para armazenar as linhas únicas
+linhas_unicas = set()
+
+# Abre um arquivo txt para escrita e insere o cabeçalho
 with open("resultados.txt", "w") as arquivo:
+    # Escreve o cabeçalho
+    arquivo.write("CNPJ | CEP | IDADE | ESTADO\n")
+    
     for linha in linhas:
         nova_linha = incluir_codigos(linha)
-        arquivo.write(nova_linha + "\n")
+        # Adiciona a nova linha ao conjunto
+        linhas_unicas.add(nova_linha)
+    
+    # Escreve as linhas únicas no arquivo
+    for linha_unica in linhas_unicas:
+        arquivo.write(linha_unica + "\n")
 
 print("Resultados salvos em 'resultados.txt'")
-
-# A Saida do Arquivo ficaria assim 
-
-# 123456780001900960100100001135SP
-# 987654320001980962203103001128RJ
-# 456789120001760963030155001142MG
-# 112233440001550966503020001150BA
-# 998877660001220969085034001119PR
-# 223344550001880967004090001160DF
